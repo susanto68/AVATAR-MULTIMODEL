@@ -1,0 +1,16 @@
+{
+	"name": "ai-avatar-multimodal",
+	"private": true,
+	"version": "1.0.0",
+	"scripts": {
+		"dev": "node server.js",
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"axios": "^1.7.7",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2"
+	}
+}
+
+

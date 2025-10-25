@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>AI Avatar – Gemini, ChatGPT, Hugging Face, Ollama</title>
+	<link rel="stylesheet" href="./style.css">
+	<!-- Tailwind for the ChatBox component UI -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<!-- React via CDN for embedding ChatBox with Babel -->
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<link rel="preconnect" href="https://unpkg.com">
+	<link rel="preconnect" href="https://cdn.jsdelivr.net">
+	<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+	<meta name="theme-color" content="#0b0f17">
+</head>
+<body>
+	<div class="app">
+		<header class="header">
+			<h1 class="title">AI Avatar</h1>
+			<div class="controls">
+				<label for="modelSelect" class="label">Model</label>
+				<select id="modelSelect" class="select">
+					<option value="huggingface" selected>Hugging Face (Free)</option>
+					<option value="chatgpt">ChatGPT (GPT-4o-mini)</option>
+					<option value="gemini">Gemini 1.5</option>
+					<option value="ollama">Ollama (Local)</option>
+				</select>
+				<span id="statusChip" class="chip">Ready</span>
+			</div>
+		</header>
+
+		<main class="main">
+			<section class="stage">
+				<div id="canvasContainer" class="canvas-container">
+					<!-- Three.js renders here -->
+				</div>
+				<div class="indicators">
+					<div id="spinner" class="spinner hidden" aria-label="Loading"></div>
+					<div id="speaking" class="speaking hidden">Speaking…</div>
+				</div>
+			</section>
+
+			<section class="chat">
+				<div id="history" class="history" aria-live="polite"></div>
+				<div class="composer">
+					<textarea id="userInput" class="input" rows="2" placeholder="Ask me anything…"></textarea>
+					<button id="micBtn" class="button" type="button" aria-label="Speak">🎤</button>
+					<button id="askBtn" class="button" type="button">Ask</button>
+				</div>
+				<p class="hint">Tip: Add API keys in Vercel to enable ChatGPT and Gemini. Without keys, it will use free Hugging Face and ResponsiveVoice.</p>
+			</section>
+
+			<!-- Sir Ganguly Chat mount -->
+			<section class="w-full mt-8">
+				<div id="sir-ganguly-root" class="px-3"></div>
+			</section>
+		</main>
+	</div>
+
+	<script type="importmap">
+{
+	"imports": {
+		"three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+		"three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+	}
+}
+	</script>
+	<script id="rvScript" src="https://code.responsivevoice.org/responsivevoice.js"></script>
+	<script type="module" src="./script.js"></script>
+	<!-- Load ChatBox component source (Babel will transpile JSX in browser) -->
+	<script type="text/babel" data-type="module" data-presets="env,react" src="./components/ChatBox.jsx"></script>
+	<!-- Mount ChatBox with Babel (so we can ship JSX without bundling) -->
+	<script type="text/babel" data-type="module" data-presets="env,react">
+		// eslint-disable-next-line no-undef
+		const rootEl = document.getElementById('sir-ganguly-root');
+		if (rootEl && window.ChatBox) {
+			// eslint-disable-next-line no-undef
+			const root = ReactDOM.createRoot(rootEl);
+			root.render(React.createElement(window.ChatBox));
+		}
+	</script>
+</body>
+</html>
+
+
