@@ -7,10 +7,9 @@
 	<link rel="stylesheet" href="./style.css">
 	<!-- Tailwind for the ChatBox component UI -->
 	<script src="https://cdn.tailwindcss.com"></script>
-	<!-- React via CDN for embedding ChatBox with Babel -->
-	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<!-- React via CDN for embedding ChatBox without Babel -->
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 	<link rel="preconnect" href="https://unpkg.com">
 	<link rel="preconnect" href="https://cdn.jsdelivr.net">
 	<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
@@ -70,17 +69,15 @@
 	</script>
 	<script id="rvScript" src="https://code.responsivevoice.org/responsivevoice.js"></script>
 	<script type="module" src="./script.js"></script>
-	<!-- Load ChatBox component source (Babel will transpile JSX in browser) -->
-	<script type="text/babel" data-type="module" data-presets="env,react" src="./components/ChatBox.jsx"></script>
-	<!-- Mount ChatBox with Babel (so we can ship JSX without bundling) -->
-	<script type="text/babel" data-type="module" data-presets="env,react">
-		// eslint-disable-next-line no-undef
-		const rootEl = document.getElementById('sir-ganguly-root');
-		if (rootEl && window.ChatBox) {
-			// eslint-disable-next-line no-undef
-			const root = ReactDOM.createRoot(rootEl);
-			root.render(React.createElement(window.ChatBox));
-		}
+	<script src="./components/ChatBox.js"></script>
+	<script>
+		(function(){
+			var rootEl = document.getElementById('sir-ganguly-root');
+			if (rootEl && window.ChatBox && window.ReactDOM) {
+				var root = ReactDOM.createRoot(rootEl);
+				root.render(React.createElement(window.ChatBox));
+			}
+		})();
 	</script>
 </body>
 </html>

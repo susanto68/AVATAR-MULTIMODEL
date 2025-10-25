@@ -5,6 +5,8 @@ const axios = require('axios');
 const fs = require('fs');
 
 dotenv.config();
+// Also load .env.local if present (do not commit this file)
+try { dotenv.config({ path: path.join(__dirname, '.env.local') }); } catch {}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
