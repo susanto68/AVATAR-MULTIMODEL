@@ -14,6 +14,9 @@
 	<link rel="preconnect" href="https://cdn.jsdelivr.net">
 	<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
 	<meta name="theme-color" content="#0b0f17">
+    <!-- Three.js UMD for production (no import maps to avoid MIME issues) -->
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 <body>
 	<div class="app">
@@ -68,7 +71,7 @@
 }
 	</script>
 	<script id="rvScript" src="https://code.responsivevoice.org/responsivevoice.js"></script>
-	<script type="module" src="/script.js"></script>
+	<script src="/script.umd.js"></script>
 	<script src="/components/ChatBox.js"></script>
 	<script>
 		(function(){
